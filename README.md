@@ -1,1 +1,1 @@
-A starter template for building applications with the MERN stack (MongoDB, Express, React, Node.js).
+A Mern Stack Blog Application, powered by AI
