@@ -11,6 +11,9 @@ dotenv.config();
 connectDb();
 
 app.use(express.json());
+app.get('/', (req, res) => {
+    res.json({ message: 'API is working' });
+})
 app.use('/api/user', UserRouter);
 app.use('/api/blog', BlogRouter);
 
