@@ -46,10 +46,10 @@ const Blog = () => {
           alt={blog?.imageUrl}
           className="w-full md:h-96 h-40 object-cover rounded-xl"
         />
-        <div className="text-4xl font-bold flex justify-betweenitems-center md:flex-row flex-col">
-          <div>{blog?.title}</div>
-          <div className="text-sm flex gap-2 w-full justify-end px-10">
-            <Eye /> <span> {blog.count} </span>
+        <div className="font-bold flex justify-betweenitems-center md:flex-row flex-col">
+          <div className="md:text-4xl ">{blog?.title}</div>
+          <div className="text-sm flex gap-2 w-full md:justify-end md:px-10">
+            <Eye /> <span> {blog?.count} </span>
           </div>
         </div>
         <div className="flex justify-between">
@@ -65,7 +65,7 @@ const Blog = () => {
           {blog?.category}{" "}
         </div>
         <div>
-          <p className="text-lg"> {blog?.content} </p>
+          <p className="md:text-lg text-sm"> {blog?.content} </p>
         </div>
         <div>
           <button className="bg-white text-black flex gap-2 border-[1px] border-black px-5 py-2 rounded-md" onClick={LikePost}>

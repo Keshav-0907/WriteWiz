@@ -6,7 +6,12 @@ const connectDb = require('./db/connectDb');
 const cors = require('cors');
 const BlogRouter = require('./routes/blogRoutes')
 
-app.use(cors());
+app.use(cors(
+    {
+        origin: '*',
+        credentials: true,
+    }
+));
 dotenv.config();
 connectDb();
 

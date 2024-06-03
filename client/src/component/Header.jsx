@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   return (
-    <header className="py-4 bg-[#A91D3A] text-white flex justify-between px-10 items-center shadow-lg fixed w-full">
+    <header className="py-4 bg-[#A91D3A] text-white flex justify-between md:px-10 px-3 items-center shadow-lg fixed w-full">
       <div className="flex items-center space-x-4">
         <Link to={"/"} className="text-2xl font-bold flex items-center gap-2">
           <Zap />
@@ -46,7 +46,7 @@ const Header = () => {
           <span>Contribute</span>
         </Link>
         <Link
-          to="/"
+          to="https://github.com/Keshav-0907/WriteWiz"
           className="hover:bg-[#151515] px-2 py-1 rounded-xl flex gap-1 items-center"
         >
           <ChevronDown size={20} />
@@ -69,7 +69,8 @@ const Header = () => {
           Home
         </Link>
         <Link
-          to="/"
+          to="https://github.com/Keshav-0907/WriteWiz"
+          target="_blank"
           className="block px-4 py-2 hover:bg-gray-700"
           onClick={toggleMobileMenu}
         >

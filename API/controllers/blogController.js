@@ -85,4 +85,14 @@ const LikeBlog = async (req, res) =>{
     })
 }
 
-module.exports = { createBlog, getAllBlogs, getSingleBlog, userBlogs, LikeBlog}
+const DeleteBlog = async (req, res) =>{
+    const { id } = req.body;
+
+    const blog = await Blog.findByIdAndDelete(id);
+    return res.status(200).json({
+        status: 'Deleted SuccesFully',
+        id,
+    })
+}
+
+module.exports = { createBlog, getAllBlogs, getSingleBlog, userBlogs, LikeBlog, DeleteBlog}

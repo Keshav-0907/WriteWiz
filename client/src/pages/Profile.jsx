@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const Profile = () => {
   const { user } = useContext(UserContext);
@@ -25,9 +26,26 @@ const Profile = () => {
     fetchUserPost();
   }, [user]);
 
+  const deletePost = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this post?")) {
+      return; 
+    }
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/blog/deleteBlog`, {
+        id,
+      }); 
+      setUserBlogs(userBlogs.filter((blog) => blog._id !== id));
+      toast.success("Post deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      toast.error("Error deleting post"); 
+    }
+  }
+  
   console.log(userBlogs);
   return (
     <div className="p-10 flex flex-col gap-10">
+      <Toaster/>
       <div className="flex items-center gap-5 ">
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS-_lB_YIKaaPz_vciNdT2ebnlUl6gJE5kBQ&s"
@@ -64,7 +82,7 @@ const Profile = () => {
                   <Link to={`/blog/${blog._id}`} className="bg-blue-500 text-white px-3 py-2 rounded-lg">
                     View
                   </Link>
-                  <button className="bg-red-500 text-white px-3 py-2 rounded-lg">
+                  <button className="bg-red-500 text-white px-3 py-2 rounded-lg" onClick={() => deletePost(blog._id)}>
                     Delete
                   </button>
                   <button className="bg-yellow-500 text-white px-3 py-2 rounded-lg">
