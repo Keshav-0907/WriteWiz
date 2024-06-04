@@ -8,7 +8,7 @@ const ApiStatus = ({ setApiStatusModel }) => {
 
   useEffect(() => {
     const checkApi = async () => {
-      if(apiAvailable){
+      if (apiAvailable) {
         setApiStatusModel(false);
       }
       try {
@@ -74,7 +74,7 @@ const ApiStatus = ({ setApiStatusModel }) => {
               <p className="text-lg font-semibold">
                 {apiAvailable
                   ? "API is up and running 😁"
-                  : "API is currently unavailable 🙁"}
+                  : "Hang Tight! 🚀 Our API is warming up and getting ready to go. This might take a moment, so please stay tuned!"}
               </p>
             </div>
           )}
