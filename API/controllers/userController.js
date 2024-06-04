@@ -13,7 +13,10 @@ const RegisterUser = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = await User.create({ name, email, password: hashedPassword });
-    res.json({ message: 'User Registered', newUser, success: true });
+    return res.json({ 
+        message: 'User Registered', 
+        newUser, 
+        success: true });
 }
 
 const LoginUser = async (req, res) => {
@@ -25,7 +28,7 @@ const LoginUser = async (req, res) => {
             message: 'Invalid Credentials',
             success: false
         });
-    }
+    };
 
     const isPasswordCorrect = await bcrypt.compare(password, curUser.password);
     if (!isPasswordCorrect) {
@@ -37,7 +40,7 @@ const LoginUser = async (req, res) => {
 
     const token = jwt.sign({ id: curUser._id }, process.env.JWT_SECRET);
 
-    res.json({ message: 'User Logged In', success: true, token });
+    return res.json({ message: 'User Logged In', success: true, token });
 }
 
 
