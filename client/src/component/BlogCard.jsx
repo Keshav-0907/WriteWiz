@@ -4,9 +4,6 @@ import { Plus } from "lucide-react";
 import { Heart, Eye } from "lucide-react";
 
 const BlogCard = ({ blog, query }) => {
-  const darkMode = false;
-
-  console.log(query);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -24,6 +21,8 @@ const BlogCard = ({ blog, query }) => {
   };
 
   const filteredBlog = filterPosts(blog, query);
+
+  console.log(filteredBlog)
 
   return (
     <div className="grid md:grid-cols-3 grid-cols-1 gap-6">

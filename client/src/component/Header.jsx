@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
-import { Zap, Home, Github, ChevronDown, Menu } from "lucide-react";
+import { Zap, Home, Github, ChevronDown, Menu, FileQuestion } from "lucide-react";
 
 const Header = () => {
   const { user } = useContext(UserContext);
@@ -10,11 +10,13 @@ const Header = () => {
   const [apiStatus, setApiStatus] = useState(true);
   const menuRef = useRef(null);
 
+  console.log('apiStatus', apiStatus)
   useEffect(() => {
     const checkApi = async () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/apiStatus`);
         const data = await res.json();
+        console.log(data)
         setApiStatus(data.status);
       } catch (error) {
         console.error("Error checking API status:", error);
@@ -72,13 +74,21 @@ const Header = () => {
           <Home size={20} />
           <span>Home</span>
         </Link>
+
         <Link
+          to="/"
+          className="hover:bg-[#151515] px-2 py-1 rounded-xl flex gap-1 items-center"
+        >
+          <FileQuestion size={20} />
+          <span>About Us</span>
+        </Link>
+        {/* <Link
           to="/https://github.com/Keshav-0907/WriteWiz"
           className="hover:bg-[#151515] px-2 py-1 rounded-xl flex gap-1 items-center"
         >
           <Github size={20} />
           <span>Contribute</span>
-        </Link>
+        </Link> */}
 
         <div className="flex gap-2">
           <div>API Status :</div>
