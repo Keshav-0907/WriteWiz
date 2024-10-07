@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { Plus } from "lucide-react";
 
 const Profile = () => {
   const { user } = useContext(UserContext);
@@ -28,34 +29,40 @@ const Profile = () => {
 
   const deletePost = async (id) => {
     if (!window.confirm("Are you sure you want to delete this post?")) {
-      return; 
+      return;
     }
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/api/blog/deleteBlog`, {
         id,
-      }); 
+      });
       setUserBlogs(userBlogs.filter((blog) => blog._id !== id));
       toast.success("Post deleted successfully!");
     } catch (error) {
       console.error("Error deleting post:", error);
-      toast.error("Error deleting post"); 
+      toast.error("Error deleting post");
     }
   }
-  
-  console.log(userBlogs);
+
   return (
-    <div className="p-10 flex flex-col gap-10">
-      <Toaster/>
-      <div className="flex items-center gap-5 ">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS-_lB_YIKaaPz_vciNdT2ebnlUl6gJE5kBQ&s"
-          alt="err"
-          className="w-20 h-20 rounded-full object-cover"
-        />{" "}
-        <div className="flex flex-col">
-          <span className="text-2xl font-bold">{user?.name}</span>
-          <span>{user?.email}</span>
+    <div className="p-10 flex flex-col gap-10 min-h-[calc(100vh-200px)]">
+      <Toaster />
+      <div className="flex  justify-between items-center">
+        <div className="flex items-center gap-5 ">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS-_lB_YIKaaPz_vciNdT2ebnlUl6gJE5kBQ&s"
+            alt="err"
+            className="w-20 h-20 rounded-full object-cover"
+          />{" "}
+          <div className="flex flex-col">
+            <span className="text-2xl font-bold">{user?.name}</span>
+            <span>{user?.email}</span>
+          </div>
         </div>
+
+        <Link to={'/createpost'} className="rounded-[10.037px] w-fit h-fit flex gap-2 py-[10px] px-[25px] text-white text-xs bg-[#2663EA] shadow-[0px_0px_0px_0.531px_#1C3FAE,0px_0.531px_1.592px_0px_rgba(0,0,0,0.10),0px_0.531px_0.398px_0px_rgba(255,255,255,0.12)_inset,0px_-2.122px_0px_0px_#1C3FAE_inset]">
+          Create New Blog <Plus size={16} />
+        </Link>
+
       </div>
 
       <div>
@@ -79,15 +86,15 @@ const Profile = () => {
                   {blog.content.slice(0, 400) + "......."}
                 </p>
                 <div className="flex gap-2">
-                  <Link to={`/blog/${blog._id}`} className="bg-blue-500 text-white px-3 py-2 rounded-lg">
+                  <Link to={`/blog/${blog._id}`} className="border-[1px] text-black w-20 flex justify-center items-center px-2 py-1 rounded-lg">
                     View
                   </Link>
-                  <button className="bg-red-500 text-white px-3 py-2 rounded-lg" onClick={() => deletePost(blog._id)}>
+                  <button className="bg-red-500 text-white w-20 px-3 py-2 rounded-lg" onClick={() => deletePost(blog._id)}>
                     Delete
                   </button>
-                  <button className="bg-yellow-500 text-white px-3 py-2 rounded-lg">
+                  {/* <button className="bg-yellow-500 text-white px-3 py-2 rounded-lg">
                     Update
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

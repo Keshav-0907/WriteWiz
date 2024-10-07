@@ -39,6 +39,26 @@ const Header = () => {
     window.location.href = "/login";
   };
 
+  const NavItems = [
+    {
+      title: 'Home',
+      href: '/'
+    },
+    {
+      title: 'About us',
+      href: '/'
+    },
+    {
+      title: 'Github',
+      href: '/'
+    },
+    {
+      title: 'Support',
+      href: '/'
+    }
+  ]
+
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -58,139 +78,42 @@ const Header = () => {
   }, [showMenu]);
 
   return (
-    <header className="py-4 bg-[#A91D3A] text-white flex justify-between md:px-10 px-3 items-center shadow-lg fixed w-full z-10">
-      <div className="flex items-center space-x-4">
-        <Link to={"/"} className="text-2xl font-bold flex items-center gap-2">
-          <Zap />
-          <span>WriteWiz</span>
-        </Link>
-      </div>
-
-      <nav className="hidden md:flex items-center space-x-6">
-        <Link
-          to="/"
-          className="hover:bg-[#151515] px-2 py-1 rounded-xl flex gap-1 items-center"
-        >
-          <Home size={20} />
-          <span>Home</span>
+    <div className='flex justify-center w-full fixed top-0 pt-5 bg-white z-20'>
+      <div className='border-[#F8F8F8] border-2 shadow-md py-[15px] px-[30px] w-2/3 rounded-full flex justify-between items-center'>
+        <Link to={'/'} className='font-InstrumentSerif flex items-center gap-2'>
+          <span className='text-lg'>WriteWiz</span>
         </Link>
 
-        <Link
-          to="/"
-          className="hover:bg-[#151515] px-2 py-1 rounded-xl flex gap-1 items-center"
-        >
-          <FileQuestion size={20} />
-          <span>About Us</span>
-        </Link>
-        {/* <Link
-          to="/https://github.com/Keshav-0907/WriteWiz"
-          className="hover:bg-[#151515] px-2 py-1 rounded-xl flex gap-1 items-center"
-        >
-          <Github size={20} />
-          <span>Contribute</span>
-        </Link> */}
-
-        <div className="flex gap-2">
-          <div>API Status :</div>
-          <div>
-            {
-              <span
-                className={`${
-                  apiStatus ? "bg-green-600" : "bg-red-600"
-                } px-2 py-1 rounded-md`}
-              >
-                {apiStatus ? "Online" : "Offline"}
-              </span>
-            }
-          </div>
+        <div className='flex gap-6'>
+          {
+            NavItems.map((item, index) => (
+              <Link key={index} href={item.href} className='text-gray-700 hover:text-black text-sm'>
+                {item.title}
+              </Link>
+            ))
+          }
         </div>
-      </nav>
 
-      <div className="md:hidden flex items-center">
-        <button onClick={toggleMobileMenu} className="focus:outline-none">
-          <Menu size={24} />
-        </button>
-      </div>
-
-      <div
-        className={`${
-          showMobileMenu ? "block" : "hidden"
-        } md:hidden absolute top-16 left-0 right-0 bg-[#3a374a] w-full py-2`}
-      >
-        <Link
-          to="/"
-          className="block px-4 py-2 hover:bg-gray-700"
-          onClick={toggleMobileMenu}
-        >
-          Home
-        </Link>
-        <Link
-          to="https://github.com/Keshav-0907/WriteWiz"
-          target="_blank"
-          className="block px-4 py-2 hover:bg-gray-700"
-          onClick={toggleMobileMenu}
-        >
-          Contribute
-        </Link>
-        <Link
-          to="/"
-          className="block px-4 py-2 hover:bg-gray-700"
-          onClick={toggleMobileMenu}
-        >
-          Categories
-        </Link>
-      </div>
-
-      <div>
-        {user ? (
-          <div className="relative" ref={menuRef}>
-            <button
-              onClick={toggleMenu}
-              className="flex items-center space-x-2 focus:outline-none"
-            >
-              <span className="flex items-center gap-2">
-                <span>{user.email}</span>
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS-_lB_YIKaaPz_vciNdT2ebnlUl6gJE5kBQ&s"
-                  className="w-8 h-8 rounded-full border-2"
-                />
-              </span>
-            </button>
-            {showMenu && (
-              <div className="absolute top-10 right-0 bg-[#3a374a] w-48 py-2 rounded-lg shadow-lg">
-                <Link
-                  to="/profile"
-                  className="block px-4 py-2 hover:bg-gray-700"
-                >
-                  Profile
-                </Link>
-                <Link
-                  to="/createpost"
-                  className="block px-4 py-2 hover:bg-gray-700"
-                >
-                  Create Post
-                </Link>
-                <div
-                  onClick={Logout}
-                  className="block px-4 py-2 hover:bg-gray-700 cursor-pointer"
-                >
-                  Logout
+        <div>
+          {
+            !user ? (
+              <Link to={'/signup'} className="rounded-[18.037px] py-[10px] px-[25px] text-white text-xs bg-[#2663EA] shadow-[0px_0px_0px_0.531px_#1C3FAE,0px_0.531px_1.592px_0px_rgba(0,0,0,0.10),0px_0.531px_0.398px_0px_rgba(255,255,255,0.12)_inset,0px_-2.122px_0px_0px_#1C3FAE_inset]">
+                Sign Up
+              </Link>
+            ) : (
+              <div className="flex gap-2 items-center">
+                <div className="rounded-[18.037px] py-[10px] px-[25px] text-white text-xs bg-[#2663EA] shadow-[0px_0px_0px_0.531px_#1C3FAE,0px_0.531px_1.592px_0px_rgba(0,0,0,0.10),0px_0.531px_0.398px_0px_rgba(255,255,255,0.12)_inset,0px_-2.122px_0px_0px_#1C3FAE_inset]">
+                  Hi, {user.name}
+                </div>
+                <div onClick={Logout} className="border-2 border-red-600 py-[10px] px-[25px] rounded-full text-xs text-red-600 hover:bg-red-600 hover:text-white cursor-pointer">
+                  LogOut
                 </div>
               </div>
-            )}
-          </div>
-        ) : (
-          <div className="flex gap-4">
-            <Link to="/login" className="hover:text-gray-300">
-              Login
-            </Link>
-            <Link to="/signup" className="hover:text-gray-300">
-              Signup
-            </Link>
-          </div>
-        )}
+            )
+          }
+        </div>
       </div>
-    </header>
+    </div>
   );
 };
 

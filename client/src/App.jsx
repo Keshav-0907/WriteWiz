@@ -14,7 +14,9 @@ function App() {
   return (
     <BrowserRouter>
       <UserProvider>
-        <Header />
+       <div className="relative pt-2">
+       <Header />
+       </div>
         <div className="pt-16">
           <Routes>
             <Route path="/" element={<Home />} />
