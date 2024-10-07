@@ -22,6 +22,6 @@ app.get('/apiStatus', (req, res) => {
 app.use('/api/user', UserRouter);
 app.use('/api/blog', BlogRouter);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 8080, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 })

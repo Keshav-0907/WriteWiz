@@ -47,12 +47,12 @@ const LoginUser = async (req, res) => {
 const UserInfo = async (req, res) => {
     const { token } = req.body;
 
-    if (!token) {
-        return res.status(400).json({
-            message: 'Invalid Token',
-            success: false
-        });
-    }
+    // if (!token) {
+    //     return res.status(400).json({
+    //         message: 'Invalid Token',
+    //         success: false
+    //     });
+    // }
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
